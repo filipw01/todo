@@ -1,16 +1,20 @@
 <template>
-  <div>
-    <p>Moja lista</p>
-
+  <div class="todolist">
+    <h1>Moja lista</h1>
+    <div class="message" v-if="message!==''">
+      {{message}}
+      <span class="close" @click="dismissMessage">
+        <div class="close__bars">
+          <span class="close__bar"></span>
+          <span class="close__bar"></span>
+        </div>
+      </span>
+    </div>
     <div>
-      <div v-if="message!==''">
-        {{message}}
-        <span @click="dismissMessage">x</span>
-      </div>
       <input v-model="newTitle" type="text" placeholder="Co chciałbyś zapisać?">
       <button @click="handleSubmit">Dodaj</button>
     </div>
-    <div>
+    <div class="tasks">
       <div :key="todo.id" v-for="todo in todos">
         <ToDoItem @remove="removeItem" :todo="todo"/>
       </div>
@@ -24,14 +28,7 @@ export default {
   data() {
     return {
       newTitle: '',
-      todos: [
-        {
-          id: 1,
-          title: 'tytuł',
-          deadline: '20 marca',
-          description: 'opis',
-        },
-      ],
+      todos: [],
       message: '',
     };
   },
@@ -77,3 +74,48 @@ export default {
   },
 };
 </script>
+<style scoped>
+.todolist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.message {
+  background-color: rgba(251, 255, 27, 0.3);
+  padding: 8px 20px;
+  border-radius: 5px;
+  margin-bottom: 23.45px;
+  position: relative;
+}
+.tasks{
+  margin-top: 50px;
+}
+.close {
+  position: absolute;
+ background-color: rgb(230, 228, 228);
+  border-radius: 50%;
+  display: block;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+.close__bars {
+  position: relative;
+  height: 100%;
+}
+.close__bar {
+  position: absolute;
+  display: block;
+  background-color: black;
+  width: 15px;
+  height: 2px;
+  top: 12px;
+  left: 6px;
+  transform: rotate(45deg);
+}
+.close__bar:first-child {
+  transform: rotate(-45deg);
+}
+</style>
