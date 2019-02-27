@@ -83,4 +83,7 @@ label {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+.close{
+  padding: 0 10px;
+}
 </style>
