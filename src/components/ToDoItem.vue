@@ -16,7 +16,10 @@
   </div>
 </template>
 <script>
+import redDirective from '../directives/redDirective';
+
 export default {
+  directives: { red: redDirective },
   props: {
     todo: {
       type: Object,
